@@ -31,8 +31,6 @@ model Group {
   users         GroupUser[]
 }
 
-
-
 model Event {
   id            Int         @id @default(autoincrement())
   jobId         Int
