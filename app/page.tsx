@@ -14,6 +14,7 @@ export default function Landing() {
         <p className="text-primary-text-color self-end underline underline-offset-2 ">Are you one of them?</p>
         <input className="outline-none transition-all ease-in-out duration-300 hover:bg-hover-color focus:bg-hover-color px-5 placeholder:text-black rounded-full py-5 bg-secondary-accent-color" type="text" placeholder="Email" />
         <input className="outline-none transition-all ease-in-out duration-300 hover:bg-hover-color focus:bg-hover-color px-5 placeholder:text-black rounded-full py-5 bg-secondary-accent-color" type="password" placeholder="Password"/>
+        <button className="self-end bg-primary-accent-color text-primary-text-color w-min py-3 px-5 rounded-full" type="submit">submit</button>
       </div>
       <div className="w-[80%] mx-auto rotate-[-2deg]">
         <h2 className="text-center font-[900] text-2xl text-primary-accent-color my-2">27th Saturday 5:00PM</h2>
