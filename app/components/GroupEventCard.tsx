@@ -1,5 +1,4 @@
 import Image from "next/image";
-import eye from "../images/eye-solid.svg";
 
 interface GroupProps {
   eventName: string;
@@ -55,7 +54,13 @@ export default function GroupEventCard({ group }: Group) {
           </h2>
 
           <button className="bg-primary-text-color rounded-full p-[1vh]">
-            <Image alt="eye" src={eye} className="w-[5vh] h-[3vh]"></Image>
+            <Image
+              alt="eye"
+              src={"/images/eye-solid.svg"}
+              width={0}
+              height={0}
+              className="w-[4vh] h-[4vh]"
+            ></Image>
           </button>
         </div>
       </div>

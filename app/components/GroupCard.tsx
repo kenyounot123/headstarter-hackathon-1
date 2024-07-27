@@ -1,18 +1,26 @@
 import Image from "next/image"
 
-// Prop should change to just a group object 
-
-interface GroupCardProps {
-  groupName: string;
+interface GroupProps {
+  eventName: string;
+  eventDate: string;
+  eventTime: string;
+  eventLocation: string;
+  eventMembers: string[];
   groupImgSrc: string;
 }
-export default function GroupCard({groupName, groupImgSrc}: GroupCardProps) {
+
+// Interface for the object that includes GroupProps
+interface Group {
+  group: GroupProps;
+}
+
+export default function GroupCard({ group }: Group) {
   return (
     <button className="w-full relative">
-      <h2 className="text-left rounded-t-md bg-primary-accent-color text-primary-text-color p-1 text-xl">{groupName}</h2>
+      <h2 className="text-left rounded-t-md bg-primary-accent-color text-primary-text-color p-1 text-xl">{group.eventName}</h2>
       <div className="h-32">
         <Image 
-         src={groupImgSrc}
+         src={group.groupImgSrc}
          width={0}
          height={0}
          alt="Picture of the author"
@@ -21,7 +29,7 @@ export default function GroupCard({groupName, groupImgSrc}: GroupCardProps) {
       </div>
 
       <div className="bg-primary-accent-color py-2 px-3 rounded-full absolute bottom-2 right-2">
-        <p className="text-primary-text-color font-[800]">🦆 8</p>
+        <p className="text-primary-text-color font-[800]">🦆 {group.eventMembers.length}</p>
       </div>
     </button>
   )
