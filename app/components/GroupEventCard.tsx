@@ -1,5 +1,5 @@
 import Image from "next/image";
-import eye from "../images/eye-solid.svg";
+import eye from "/images/eye-solid.svg";
 
 interface GroupProps {
   eventName: string;

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import GroupCard from '../components/GroupCard'
-export default function Home() {
+import { GROUP_OBJ } from "../lib/global.js"
+export default function Dashboard() {
   return (
     <div className='flex flex-col gap-5 w-[80%] mx-auto'>
       {/* Email of currently signed in user */}
@@ -17,7 +18,9 @@ export default function Home() {
         <div className='text-4xl absolute bottom-2 right-7'>🐤</div>
       </button>
       {/* Loop through Group data  */}
-      <GroupCard groupName={"Mountain meetups"} groupImgSrc={"/images/card-img.png"}/>
+      {GROUP_OBJ.map((group) => (
+        <GroupCard key={group.id} group={group} />
+      ))}
     </div>
   )
 }
