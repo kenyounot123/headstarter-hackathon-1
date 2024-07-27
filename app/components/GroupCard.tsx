@@ -1,5 +1,7 @@
 import Image from "next/image"
 
+// Prop should change to just a group object 
+
 interface GroupCardProps {
   groupName: string;
   groupImgSrc: string;
@@ -18,8 +20,8 @@ export default function GroupCard({groupName, groupImgSrc}: GroupCardProps) {
          className="w-full h-full object-cover rounded-b-md" />
       </div>
 
-      <div>
-
+      <div className="bg-primary-accent-color py-2 px-3 rounded-full absolute bottom-2 right-2">
+        <p className="text-primary-text-color font-[800]">🦆 8</p>
       </div>
     </button>
   )
