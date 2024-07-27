@@ -14,7 +14,7 @@ model User {
   emailVerified DateTime?
   username       String?
   // password       String
-  phone          String
+  // phone          String
   profilePicture String?
   groups             Group[]
   events            Event[]
