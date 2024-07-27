@@ -1,12 +1,12 @@
 import Image from "next/image";
 
-export default function Home() {
+export default function Landing() {
   return (
-    <div className="h-[100dvh] overflow-y-hidden">
+    <>
       <div className="w-[80%] mx-auto">
-        <h1 className="font-bold text-7xl text-primary-text-color font-[900]">Connect, plan, and experience. All in one place.</h1>
+        <h1 className="font-bold text-6xl min-[500px]:text-7xl text-primary-text-color font-[900]">Connect, plan, and experience. All in one place.</h1>
       </div>
-      <div className="w-[95%] text-primary-accent-color font-bold my-5 ">
+      <div className="w-[95%] text-primary-accent-color font-bold my-5">
         <h2 className="text-9xl tracking-[-0.1em] font-[900] pl-5">10,000</h2>
         <p className="text-right text-4xl font-[900]">users are Dawdling</p>
       </div>
@@ -37,6 +37,6 @@ export default function Home() {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }
