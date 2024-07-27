@@ -36,23 +36,28 @@ export default function GroupEventCard({ group }: Group) {
       </div>
       <div className="w-full flex items-center justify-between py-[2vh]">
         <h2 className="flex gap-[1vh] items-center text-left rounded-full bg-primary-accent-color w-fit text-primary-text-color text-[2.5vh] p-[2vh]">
-        <div className="flex justify-center items-center m-auto w-[30px] h-[30px] bg-primary-text-color rounded-full">
-              <span className="text-center m-auto">🦆</span>
-            </div>
+          <div className="flex justify-center items-center m-auto w-[30px] h-[30px] bg-primary-text-color rounded-full">
+            <span className="text-center m-auto">🦆</span>
+          </div>
           {group.eventMembers[0]}
         </h2>
 
-        <h2 className="flex gap-[0.75vh] text-left rounded-full bg-primary-accent-color w-fit text-primary-text-color text-[2.5vh] p-[2vh]">
-          {group.eventMembers.map((member, id) => (
-            <div key={id} className="flex justify-center items-center m-auto w-[30px] h-[30px] bg-primary-text-color rounded-full">
-              <span className="text-center m-auto">🐤</span>
-            </div>
-          ))}
-        </h2>
+        <div className="flex gap-[1vh]">
+          <h2 className="flex gap-[0.75vh] text-left rounded-full bg-primary-accent-color w-fit text-primary-text-color text-[2.5vh] p-[2vh]">
+            {group.eventMembers.map((member, id) => (
+              <div
+                key={id}
+                className="flex justify-center items-center m-auto w-[30px] h-[30px] bg-primary-text-color rounded-full"
+              >
+                <span className="text-center m-auto">🐤</span>
+              </div>
+            ))}
+          </h2>
 
-        <button className="bg-primary-text-color rounded-full p-[1vh]">
-          <Image alt="eye" src={eye} className="w-[4vh] h-[4vh]"></Image>
-        </button>
+          <button className="bg-primary-text-color rounded-full p-[1vh]">
+            <Image alt="eye" src={eye} className="w-[5vh] h-[3vh]"></Image>
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import GroupEventCard from '../../components/GroupEventCard'
+import EventDecisionButton from '../../components/EventChoiceButton'
 
 const groupObj = [
   {
@@ -16,6 +17,10 @@ export default function Home() {
   return (
     <div className='flex flex-col gap-5 w-[92%] mx-auto'>
      <GroupEventCard group={groupObj[0]} />
+     <div className='flex w-full justify-between'>
+     <EventDecisionButton />
+     </div>
+
     </div>
   )
 }
