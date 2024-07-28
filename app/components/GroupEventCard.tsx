@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import { GROUP_OBJ } from "../lib/global";
 
 interface GroupProps {
   eventName: string;
@@ -9,12 +13,19 @@ interface GroupProps {
   groupImgSrc: string;
 }
 
-// Interface for the object that includes GroupProps
 interface Group {
   group: GroupProps;
 }
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
 export default function GroupEventCard({ group }: Group) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="w-full relative">
       <h2 className="text-left text-primary-accent-color p-[0.5vh] text-[4vh] font-[900]">
@@ -53,7 +64,7 @@ export default function GroupEventCard({ group }: Group) {
             ))}
           </h2>
 
-          <button className="bg-primary-text-color rounded-full p-[1vh]">
+          <button onClick={openModal} className="bg-primary-text-color rounded-full p-[1vh]">
             <Image
               alt="eye"
               src={"/images/eye-solid.svg"}
@@ -64,6 +75,43 @@ export default function GroupEventCard({ group }: Group) {
           </button>
         </div>
       </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 }
+
+const Modal = ({ isOpen, onClose }: ModalProps) => {
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="text-primary-text-color fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
+      onClick={onClose}
+    >
+      <div
+        className="bg-primary-accent-color p-6 rounded-lg shadow-lg max-w-sm w-full relative"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold">Attendees -{GROUP_OBJ[0].eventMembers.length}</h2>
+          <button
+            className="text-3xl hover:text-gray-800"
+            onClick={onClose}
+          >
+            &times;
+          </button>
+        </div>
+        {GROUP_OBJ[0].eventMembers.map((member) => (
+          <>
+            <div className="flex gap-2 mt-5 items-center">
+              <div className="text-5xl p-2 rounded-full bg-white">
+                🐤
+              </div>
+              <p className="text-2xl font-[900]">{member}</p>
+            </div>
+          </>
+        ))}
+      </div>
+    </div>
+  );
+};

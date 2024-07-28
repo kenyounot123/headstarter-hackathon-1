@@ -7,7 +7,7 @@ import React, { useState } from "react";
 // }
 
 export default function EventDecisionButton() {
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   const [decision, setDecision] = useState(true);
 
   const handleChoice = (decision: boolean) => {
