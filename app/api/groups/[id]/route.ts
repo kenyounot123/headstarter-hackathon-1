@@ -77,7 +77,6 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-export async function POST(req: NextRequest) {
   /**
    * POST a user to a group
    */
