@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client/extension";
 
 const prisma = PrismaClient();
 
-export async function getAllEvents(req: Request) {
+export async function GET(req: Request) {
 
   const url = new URL(req.url);
   const id = url.pathname.split("/").pop();
