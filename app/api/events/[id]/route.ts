@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 
 export async function GET(req: Request) {
@@ -13,5 +13,6 @@ export async function GET(req: Request) {
         //     groupId: id
         // }
     })
+    return NextResponse.json({"message": "succes"})
 
 }
