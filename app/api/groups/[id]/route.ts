@@ -49,14 +49,25 @@ export async function GET(req: NextRequest) {
     // console.log(group);
 
     // Fetch all users in parallel using Promise.all and map
-    const promiseArray = group?.users.map(user => {
-        return prisma.user.findUnique({
-            where: {
-                id: user.userId
-            },
-            });
-    })
-    const usersDetails = await Promise.all(promiseArray);
+    const promiseArray = group?.users.map((user) => {
+      return prisma.user.findUnique({
+        where: {
+          id: user.userId,
+        },
+      });
+    });
+    const usersDetails = await Promise.all(promiseArray as Array<Promise<any>>);
+
+    if (!group) {
+      return NextResponse.json(
+        { message: "Group not found" },
+        {
+          status: 404,
+          statusText: "Not Found",
+        }
+      );
+    }
+
     group.users = usersDetails;
     return NextResponse.json(group);
   } catch (error) {
@@ -85,8 +96,8 @@ export async function POST(req: NextRequest) {
 
   // read body
   const data = await req.formData();
-  const adminEmail = data.get("adminEmail");
-  const userEmail = data.get("userEmail");
+  const adminEmail = data.get("adminEmail") as string;
+  const userEmail = data.get("userEmail") as string;
 
   try {
     const group = await prisma.group.findUnique({
@@ -94,17 +105,50 @@ export async function POST(req: NextRequest) {
         id: parseInt(id),
       },
     });
+
+    if (!group) {
+      return NextResponse.json(
+        { message: "Group not found" },
+        {
+          status: 404,
+          statusText: "Not Found",
+        }
+      );
+    }
+
     const admin = await prisma.user.findFirst({
       where: {
         email: adminEmail,
       },
     });
+
+    if (!admin) {
+      return NextResponse.json(
+        { message: "Admin not found" },
+        {
+          status: 404,
+          statusText: "Not Found",
+        }
+      );
+    }
+
     if (admin.id == group.adminId) {
       const user = await prisma.user.findFirst({
         where: {
           email: userEmail,
         },
       });
+
+      if (!user) {
+        return NextResponse.json(
+          { message: "User not found" },
+          {
+            status: 404,
+            statusText: "Not Found",
+          }
+        );
+      }
+
       const groupUser = await prisma.groupUser.create({
         data: {
           userId: user.id,

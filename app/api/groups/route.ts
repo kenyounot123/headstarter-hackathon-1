@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { getServerSession } from "next-auth/next"
+// import { getServerSession } from "next-auth/next"
 import { NextRequest, NextResponse } from 'next/server';
 
 
@@ -36,6 +36,16 @@ export async function POST(req: NextRequest) {
                 email: data.get('email') as string
             }
         })
+        if (!admin) {
+            return NextResponse.json(
+                { message: 'Admin not found' },
+                {
+                  status: 404,
+                  statusText: 'Not Found',
+                }
+              );
+        }
+
         const group = await prisma.group.create({
             data: {
                 admin: {
