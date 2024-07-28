@@ -53,7 +53,6 @@ export async function POST(req: NextRequest) {
                         id: admin.id
                     }
                 },
-                secretCode: secretCode,
             }
         })
         await prisma.groupUser.create({
