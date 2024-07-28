@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
         //     }
         // })
     
-        // return NextResponse.json(group);
+        return NextResponse.json({"message": "success"});
       } catch (error) {
         console.error('Error fetching users in group:', error);
       }
