@@ -1,9 +1,5 @@
-// import prisma from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse} from "next/server";
-import { PrismaClient } from "@prisma/client/extension";
-
-const prisma = PrismaClient();
-
 // export async function () {
 
 //     const events = await prisma.event.create({
@@ -46,31 +42,23 @@ export async function POST(req: NextRequest) {
               );
         }
 
-        const group = await prisma.group.create({
-            data: {
-                admin: {
-                    connect: {
-                        id: admin.id
-                    }
-                },
-            }
-        })
-        await prisma.groupUser.create({
-            data: {
-                user: {
-                    connect: {
-                        id: admin.id
-                    }
-                },
-                group: {
-                    connect: {
-                        id: group.id
-                    }
-                }
-            }
-        })
+
+        // await prisma.groupUser.create({
+        //     data: {
+        //         user: {
+        //             connect: {
+        //                 id: admin.id
+        //             }
+        //         },
+        //         group: {
+        //             connect: {
+        //                 id: group.id
+        //             }
+        //         }
+        //     }
+        // })
     
-        return NextResponse.json(group);
+        // return NextResponse.json(group);
       } catch (error) {
         console.error('Error fetching users in group:', error);
       }

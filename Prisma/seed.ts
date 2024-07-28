@@ -1,13 +1,10 @@
 // seed.ts
-// import { PrismaClient } from '@prisma/client';
+// prisma = require("../lib/prisma");
+import prisma from "@/lib/prisma";
 
-const { PrismaClient } = require('@prisma/client'); 
-
-const prisma = new PrismaClient();
-// const prisma = require("../lib/prisma");
-  let lastId: number
-  const userIds: any = [];
-  const groupData: any = [];
+let lastId: number
+const userIds: any = [];
+const groupData: any = [];
 
 async function main() {
   // Clear existing data
@@ -95,15 +92,15 @@ try {
     for (let i=0; i < userIds.length; i++) {
       console.log("✅✅✅ ", userIds[i], groupData[i%groupData.length])
       const [id, code] = groupData[i]
-      const createdGroupUsers = await prisma.groupuser.create({
-        data: {
-          userId: userIds[i],
-          groupId: groupData[(i/groupData.length)%groupData.length][0],
-          // secretCode: code,
-          // adminId: lastId 
-        }
-      })
-      console.log('Group User created:', createdGroupUsers);
+      // const createdGroupUsers = await prisma.groupuser.create({
+      //   data: {
+      //     userId: userIds[i],
+      //     groupId: groupData[(i/groupData.length)%groupData.length][0],
+      //     // secretCode: code,
+      //     // adminId: lastId 
+      //   }
+      // })
+      // console.log('Group User created:', createdGroupUsers);
     }
   } catch (error) {
     console.error('Error in Group User main function', error);
