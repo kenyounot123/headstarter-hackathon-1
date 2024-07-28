@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
     // console.log(group);
 
     // Fetch all users in parallel using Promise.all and map
-    const promiseArray = group?.users.map((user) => {
+    const promiseArray = group?.users.map((user: any) => {
       return prisma.user.findUnique({
         where: {
           id: user.userId,
