@@ -1,6 +1,6 @@
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
@@ -9,19 +9,19 @@ generator client {
 }
 
 model User {
-  id             Int     @id @default(autoincrement())
-  email          String  @unique
-  emailVerified DateTime?
+  id             Int         @id @default(autoincrement())
+  email          String      @unique
+  emailVerified  DateTime?
   username       String?
   // password       String
   // phone          String
   profilePicture String?
-  groups             Group[]
-  events            Event[]
-  userGroups        GroupUser[]
-  userEvents        EventUser[]
-  accounts          Account[]
-  sessions          Session[]
+  groups         Group[]
+  events         Event[]
+  userGroups     GroupUser[]
+  userEvents     EventUser[]
+  accounts       Account[]
+  sessions       Session[]
 }
 
 model Account {
@@ -36,80 +36,80 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@id([provider, providerAccountId])
 }
- 
+
 model Session {
   sessionToken String   @unique
   userId       Int
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+
   @@id([identifier, token])
 }
 
 model Group {
-  id            Int       @id @default(autoincrement())
-  secretCode    String
-  adminId       Int
-  admin         User      @relation(fields: [adminId], references: [id], onDelete: Cascade)
-  events        Event[]
-  createdAt     DateTime    @default(now())
-  users         GroupUser[]
+  id         Int         @id @default(autoincrement())
+  secretCode String
+  adminId    Int
+  admin      User        @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  events     Event[]
+  createdAt  DateTime    @default(now())
+  users      GroupUser[]
 }
 
 model Event {
-  id            Int         @id @default(autoincrement())
-  jobId         Int
-  adminId       Int
-  admin         User        @relation(fields: [adminId], references: [id], onDelete: Cascade)
-  groupId       Int
-  group         Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  users         EventUser[]
-  placeId       Place?
-  createdAt     DateTime    @default(now())
-}
-
-model GroupUser {
-  id            Int         @id @default(autoincrement())
-  group         Group       @relation(fields:[groupId], references: [id], onDelete: Cascade)
-  groupId       Int         
-  user          User        @relation(fields:[userId], references: [id], onDelete: Cascade)
-  userId        Int
-}
-
-model EventUser {
-  id            Int         @id @default(autoincrement())
-  event         Event       @relation(fields:[eventId], references: [id], onDelete: Cascade)
-  eventId       Int         
-  user          User        @relation(fields:[userId], references: [id], onDelete: Cascade)
-  userId        Int
-}
-
-model Place {
   id        Int         @id @default(autoincrement())
-  eventId   Int         @unique
-  event     Event       @relation(fields:[eventId], references: [id], onDelete: Cascade)
-  address   String      
+  jobId     Int
+  adminId   Int
+  admin     User        @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  groupId   Int
+  group     Group       @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  users     EventUser[]
+  placeId   Place?
   createdAt DateTime    @default(now())
 }
 
+model GroupUser {
+  id      Int   @id @default(autoincrement())
+  group   Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId Int
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  Int
+}
+
+model EventUser {
+  id      Int   @id @default(autoincrement())
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId Int
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  Int
+}
+
+model Place {
+  id        Int      @id @default(autoincrement())
+  eventId   Int      @unique
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  address   String
+  createdAt DateTime @default(now())
+}
+
 model Waitlist {
-  id        Int         @id @default(autoincrement())
-  email     String      @unique
+  id    Int    @id @default(autoincrement())
+  email String @unique
 }
