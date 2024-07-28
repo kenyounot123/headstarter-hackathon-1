@@ -14,13 +14,15 @@ interface Props {
 // };
 // export default Providers;
 
-export default Providers;
-  return 
-        <SessionProvider>
-          <Provider store={store}>
-            {children}
-          </Provider>
-        </SessionProvider>
-      ;
+export default function Providers({ children }: Props) {
+  return (
+    <SessionProvider>
+      <Provider store={store}>
+        {children}
+      </Provider>
+    </SessionProvider>
+  
+  )
+
 };
 
