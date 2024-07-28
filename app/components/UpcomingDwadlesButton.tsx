@@ -1,6 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectCurrentGlobalEvent,
+  setGlobalEvent
+} from "../slices/globalEventSlice";
 
 interface GroupProps {
   eventName: string;
@@ -22,6 +27,7 @@ interface ModalProps {
 
 export default function UpcomingDwadlesButton({ groups }: Group) {
   const [activeGroupIndex, setActiveGroupIndex] = useState<number | null>(null);
+  const dispatch = useDispatch();
 
   const [active, setActive] = useState<boolean[]>(
     new Array(groups.length).fill(true)
@@ -32,6 +38,7 @@ export default function UpcomingDwadlesButton({ groups }: Group) {
     newActive[index] = !newActive[index];
     setActive(newActive);
     setActiveGroupIndex(index);
+    dispatch(setGlobalEvent(index))
   };
 
   return (
@@ -44,9 +51,9 @@ export default function UpcomingDwadlesButton({ groups }: Group) {
           key={index}
           onClick={() => handleEvent(index)}
           className={`${
-            active[index]
-              ? "bg-primary-accent-color text-white"
-              : "bg-primary-text-color text-primary-accent-color"
+              activeGroupIndex == index
+              ? "bg-primary-accent-color text-white hidden"
+              : "bg-[#D9D9D9] text-primary-accent-color"
           } pl-[2vh] flex gap-[2vh] items-center justify-between w-full rounded-full text-[1.75vh]`}
         >
           <span>{group.eventName}</span>
@@ -56,8 +63,8 @@ export default function UpcomingDwadlesButton({ groups }: Group) {
           </div>
           <div
             className={`${
-              active[index]
-                ? "bg-primary-text-color text-primary-accent-color"
+              activeGroupIndex == index
+                ? "bg-[#D9D9D9] text-primary-accent-color"
                 : "bg-primary-accent-color text-white"
             } font-[700] ml-auto w-fit rounded-full text-[2.0vh] p-[1.5vh] text-center`}
           >

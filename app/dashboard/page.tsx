@@ -1,7 +1,9 @@
 import Link from "next/link";
 import GroupCard from "../components/GroupCard";
 import { GROUP_OBJ } from "../lib/global.js";
+
 export default function Dashboard() {
+
   return (
     <div className="flex flex-col gap-5 w-[80%] mx-auto">
       {/* Email of currently signed in user */}

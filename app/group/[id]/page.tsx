@@ -1,17 +1,24 @@
 "use client";
-
+import type { NextPage } from "next";
 import GroupEventCard from "../../components/GroupEventCard";
 import { GROUP_OBJ } from "../../lib/global";
 import EventDecisionButton from "../../components/EventChoiceButton";
 import UpcomingDwadlesButton from "../../components/UpcomingDwadlesButton"
 import { usePathname, useSearchParams } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  selectCurrentGlobalEvent,
+} from "../../slices/globalEventSlice";
+
 
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+const Group: NextPage = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const currentGlobalEvent = useSelector(selectCurrentGlobalEvent);
   // this works for search params:
   // http://localhost:3004/group/id?123
 
@@ -37,7 +44,7 @@ export default function Home() {
         </div>
       </div>
 
-      <GroupEventCard group={GROUP_OBJ[1]} />
+      <GroupEventCard group={GROUP_OBJ[currentGlobalEvent]} />
       <div className="flex w-full justify-between">
         <EventDecisionButton />
       </div>
@@ -48,3 +55,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Group;
