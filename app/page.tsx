@@ -7,11 +7,11 @@ export default function Landing() {
         <h1 className="animate-fadeIn text-[6vh] lg:text-[7vh] text-primary-text-color font-[900]">
           Connect, plan, and experience. All in one place.
         </h1>
-        <div className="w-[95%] lg:w-[61%] text-primary-accent-color font-bold -ml-[2vh] lg:ml-0 my-5">
-          <h2 className="animate-fadeIn text-[10vh] lg:text-[20vh] tracking-[-0.1em] font-[900] lg:pl-5">
+        <div className="w-[95%]  text-primary-accent-color font-bold -ml-[2vh] lg:ml-0 my-5">
+          <h2 className="lg:w-[100%] animate-fadeIn text-[10vh] lg:text-[20vh] tracking-[-0.1em] font-[900] lg:pl-5">
             10,000
           </h2>
-          <p className="animate-fadeIn text-right text-[3.25vh] lg:text-[4vh] font-[900] -mr-[2vh] lg:mr-0">users are Dawdling</p>
+          <p className="lg:w-[61%] animate-fadeIn text-right text-[3.25vh] lg:text-[4vh] font-[900] -mr-[2vh] lg:mr-0">users are Dawdling</p>
         </div>
         <div className="w-[80%] lg:my-0 lg:mx-0 mx-auto flex flex-col gap-3 my-5 pb-5">
           <p className="text-primary-text-color lg:self-start self-end underline underline-offset-2 ">
