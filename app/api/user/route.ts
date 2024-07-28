@@ -1,9 +1,9 @@
 import prisma from "@/lib/prisma";
 
-export async function getEventUsers(eventId: number) {
-    const users = await prisma.user.findMany({
+export async function postUsers(req: Request) {
+    const users = await prisma.user.f({
         where: {
-            : eventId
+            
         },
         include: {
             users: true

@@ -67,7 +67,7 @@ model Group {
   id            Int       @id @default(autoincrement())
   secretCode    String
   adminId       Int
-  admin         User      @relation(fields: [adminId], references: [id])
+  admin         User      @relation(fields: [adminId], references: [id], onDelete: Cascade)
   events        Event[]
   createdAt     DateTime    @default(now())
   users         GroupUser[]
@@ -77,9 +77,9 @@ model Event {
   id            Int         @id @default(autoincrement())
   jobId         Int
   adminId       Int
-  admin         User        @relation(fields: [adminId], references: [id])
+  admin         User        @relation(fields: [adminId], references: [id], onDelete: Cascade)
   groupId       Int
-  group         Group         @relation(fields: [groupId], references: [id])
+  group         Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
   users         EventUser[]
   placeId       Place?
   createdAt     DateTime    @default(now())
@@ -87,24 +87,24 @@ model Event {
 
 model GroupUser {
   id            Int         @id @default(autoincrement())
-  group         Group       @relation(fields:[groupId], references: [id])
+  group         Group       @relation(fields:[groupId], references: [id], onDelete: Cascade)
   groupId       Int         
-  user          User        @relation(fields:[userId], references: [id])
+  user          User        @relation(fields:[userId], references: [id], onDelete: Cascade)
   userId        Int
 }
 
 model EventUser {
   id            Int         @id @default(autoincrement())
-  event         Event       @relation(fields:[eventId], references: [id])
+  event         Event       @relation(fields:[eventId], references: [id], onDelete: Cascade)
   eventId       Int         
-  user          User        @relation(fields:[userId], references: [id])
+  user          User        @relation(fields:[userId], references: [id], onDelete: Cascade)
   userId        Int
 }
 
 model Place {
   id        Int         @id @default(autoincrement())
   eventId   Int         @unique
-  event     Event       @relation(fields:[eventId], references: [id])
+  event     Event       @relation(fields:[eventId], references: [id], onDelete: Cascade)
   address   String      
   createdAt DateTime    @default(now())
 }
