@@ -1,10 +1,7 @@
 import prisma from "@/lib/prisma";
-import { getServerSession } from "next-auth/next";
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
   /**
    * Gets all group information and returns it
    * if the user is authenticated and in the group
@@ -68,13 +65,23 @@ export async function GET(req: NextApiRequest) {
   }
 }
 
-export async function POST(req: NextApiRequest) {
+export async function POST(req: NextRequest) {
   /**
    * POST a user to a group
    */
 
-  const url = new URL(req.url);
+  const url = new URL(req.url as string);
   const id = url.pathname.split("/").pop();
+
+  if (!id) {
+    return NextResponse.json(
+      { message: "Please provide a group id" },
+      {
+        status: 400,
+        statusText: "Bad Request",
+      }
+    );
+  }
 
   // read body
   const data = await req.formData();
@@ -119,9 +126,19 @@ export async function POST(req: NextApiRequest) {
   }
 }
 
-export async function DELETE(req: NextApiRequest) {
-  const url = new URL(req.url);
+export async function DELETE(req: NextRequest) {
+  const url = new URL(req.url as string);
   const id = url.pathname.split("/").pop();
+
+  if (!id) {
+    return NextResponse.json(
+      { message: "Please provide a group id" },
+      {
+        status: 400,
+        statusText: "Bad Request",
+      }
+    );
+  }
 
   try {
     await prisma.group.delete({
