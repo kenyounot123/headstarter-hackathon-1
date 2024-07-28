@@ -1,6 +1,18 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+import { useSession, signIn, signOut } from "next-auth/react"
+
+export default function Component() {
+  const { data: session } = useSession()
+  console.log(session)
+  if (session) {
+    return (
+      <>
+        Signed in as {session.user.email} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    )
+  }
   return (
     <div className="h-[100dvh] overflow-y-hidden">
       <div className="w-[80%] mx-auto">
