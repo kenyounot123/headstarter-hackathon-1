@@ -1,4 +1,5 @@
 import NextAuth from "next-auth/next";
+import { NextAuthOptions } from 'next-auth';
 import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter"
 // import { PrismaClient } from "@prisma/client"
@@ -6,7 +7,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 // const prisma = new PrismaClient()
 import prisma from "@/lib/prisma";
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     EmailProvider({
@@ -21,6 +22,7 @@ const handler = NextAuth({
       from: process.env.EMAIL_FROM,
     }),
   ],
-});
+};
 
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
