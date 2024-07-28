@@ -1,8 +1,6 @@
 // import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
-
 import { PrismaClient } from "@prisma/client/extension";
 
 const prisma = PrismaClient();
@@ -18,6 +16,16 @@ export async function GET(req: Request) {
 
     // Example: Get the value of the "email" query parameter
     const email = queryParams.get("email");
+
+    if (!email) {
+        return NextResponse.json(
+            { message: "Please provide an email" },
+            {
+                status: 400,
+                statusText: "Bad Request",
+            }
+        );
+    }
   
     try {
       // find group with group id and user email

@@ -4,6 +4,6 @@ export function middleware(request: NextRequest) {
     const token = request.headers.get("Authorization");
 
     if (token === null) {
-        return NextResponse.redirect(new Url("/login", request.url))
+        return NextResponse.redirect(new URL("/login", request.url))
     }
 }

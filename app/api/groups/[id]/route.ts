@@ -82,7 +82,6 @@ export async function POST(req: NextRequest) {
    */
 
   const url = new URL(req.url as string);
-  const url = new URL(req.url as string);
   const id = url.pathname.split("/").pop();
 
   if (!id) {
@@ -97,8 +96,6 @@ export async function POST(req: NextRequest) {
 
   // read body
   const data = await req.formData();
-  const adminEmail = data.get("adminEmail") as string;
-  const userEmail = data.get("userEmail") as string;
   const adminEmail = data.get("adminEmail") as string;
   const userEmail = data.get("userEmail") as string;
 
