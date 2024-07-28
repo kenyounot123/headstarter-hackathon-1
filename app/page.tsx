@@ -17,7 +17,7 @@ export default function Landing() {
           <p className="text-primary-text-color lg:self-start self-end underline underline-offset-2 ">
             Are you one of them?
           </p>
-          <div className="flex lg:flex-row flex-col justify-start lg:w-[35%] lg:gap-[2vh] gap-[1vh]">
+          <div className="flex lg:flex-row flex-col justify-start lg:gap-[2vh] gap-[1vh]">
             <input
               className="animate-fadeIn outline-none transition-all ease-in-out duration-300 hover:bg-hover-color focus:bg-hover-color px-5 placeholder:text-black rounded-full py-5 bg-secondary-accent-color"
               type="text"
