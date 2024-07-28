@@ -1,10 +1,9 @@
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth/next"
-import { NextResponse } from 'next/server';
-import { authOptions } from "../auth/[...nextauth]/route";
+import { NextRequest, NextResponse } from 'next/server';
 
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     /**
      * Create a new group
      */
@@ -34,7 +33,7 @@ export async function POST(req: Request) {
     try {
         const admin = await prisma.user.findUnique({
             where: {
-                email: data.get('email')
+                email: data.get('email') as string
             }
         })
         const group = await prisma.group.create({
