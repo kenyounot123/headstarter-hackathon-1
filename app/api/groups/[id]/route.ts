@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+// import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -77,10 +77,12 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest) {
   /**
    * POST a user to a group
    */
 
+  const url = new URL(req.url as string);
   const url = new URL(req.url as string);
   const id = url.pathname.split("/").pop();
 
@@ -96,6 +98,8 @@ export async function POST(req: NextRequest) {
 
   // read body
   const data = await req.formData();
+  const adminEmail = data.get("adminEmail") as string;
+  const userEmail = data.get("userEmail") as string;
   const adminEmail = data.get("adminEmail") as string;
   const userEmail = data.get("userEmail") as string;
 
@@ -173,6 +177,16 @@ export async function POST(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   const url = new URL(req.url as string);
   const id = url.pathname.split("/").pop();
+
+  if (!id) {
+    return NextResponse.json(
+      { message: "Please provide a group id" },
+      {
+        status: 400,
+        statusText: "Bad Request",
+      }
+    );
+  }
 
   if (!id) {
     return NextResponse.json(
