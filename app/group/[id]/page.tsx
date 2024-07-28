@@ -49,9 +49,11 @@ const Group: NextPage = () => {
         <EventDecisionButton />
       </div>
       <UpcomingDwadlesButton groups={GROUP_OBJ}/>
-      <button className="font-[900] bg-primar">
-        event +
-      </button>
+      <Link href="/events/create">
+        <button className="font-[900] bg-primar">
+          event +
+        </button>
+      </Link>
     </div>
   );
 }
