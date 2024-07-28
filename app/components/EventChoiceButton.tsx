@@ -23,10 +23,10 @@ export default function EventDecisionButton() {
     <>
       {active ? (
         <>
-        <button onClick={() => handleActive()} className="bg-secondary-accent-color w-full rounded-full p-[1vh]">
-          <h1 className="bg-[#] text-[3.5vh] font-[900] text-primary-accent-color">
-          {decision ? "joining in" : "holding off"}
-          </h1>
+          <button onClick={() => handleActive()} className="bg-secondary-accent-color w-full rounded-full p-[1vh]">
+            <h1 className="bg-[#] text-[3.5vh] font-[900] text-primary-accent-color">
+            {decision ? "joining in" : "holding off"}
+            </h1>
           </button>
         </>
       ) : (

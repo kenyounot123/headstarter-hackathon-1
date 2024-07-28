@@ -101,15 +101,15 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
             &times;
           </button>
         </div>
-        {GROUP_OBJ[0].eventMembers.map((member) => (
-          <>
+        {GROUP_OBJ[0].eventMembers.map((member,idx) => (
+          <div key={idx}>
             <div className="flex gap-2 mt-5 items-center">
               <div className="text-5xl p-2 rounded-full bg-white">
                 🐤
               </div>
               <p className="text-2xl font-[900]">{member}</p>
             </div>
-          </>
+          </div>
         ))}
       </div>
     </div>
